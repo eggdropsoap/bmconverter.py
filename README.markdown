@@ -4,6 +4,10 @@
 
 Author: [Michael Goerz](http://michaelgoerz.net)
 
+*Conversion from Python 2 to Python 3 by [eggdropsoap](https://github.com/eggdropsoap/)*
+
+  - *Please report Python 3 bugs to the [issue tracker for the Python 3–compatible update](https://github.com/eggdropsoap/bmconverter.py/issues).
+
 `bmconverter.py` converts between the bookmark description formats used by
 different pdf and djvu bookmarking tools such as [pdftk][1], the [iText
 toolbox][2], [pdfLaTeX][3] [pdfWriteBookmarks][4], [jpdftweak][5], [djvused][6], and the
