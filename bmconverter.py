@@ -670,9 +670,9 @@ class Bookmark:
         """Print out a representation of the tree, similar to the text output
         format"""
         if not self.is_root():
-            print "    " * ( self.level() - 1 ) \
+            print("    " * ( self.level() - 1 ) \
            + (unicode(self.title)).encode('ascii','replace') + " :: " \
-           + str(self.page)
+           + str(self.page))
         for child in self.children():
             child.debug()
 
@@ -680,7 +680,7 @@ class Bookmark:
         """Print each node in the tree, recursively"""
         self.reset()
         for node in self:
-            print str(node)
+            print(str(node))
         self.reset()
 
     def _obliterate(self):
@@ -877,7 +877,7 @@ class Bookmark:
 
 def usage():
     """Display Program Usage"""
-    print """
+    print( """
 bmconverter.py
 (c) 2011 Michael Goerz - This program is provided under the terms of the GPL.
 
@@ -917,10 +917,11 @@ All data is read and written in UTF-8 encoding, with the exception of xml files,
 which are read in the encoding declared in their header, but always written in
 UTF-8
 """
+)
 
 def show_help():
     """Display full help"""
-    print __doc__
+    print(__doc__)
 
 def main():
     """Command line program for converting between bookmark formats"""
