@@ -581,7 +581,11 @@ class Bookmark:
 
     def has_children(self):
         """Check if the node has any children"""
-        return (len(self._children) > 0)
+        # return (len(self._children) > 0)
+        if self._children:
+            return True
+        else:
+            return False
 
     def number_of_children(self):
         """Return the number of children"""
@@ -697,42 +701,19 @@ class Bookmark:
 
     def __iter__(self):
         """The iterator for this class is defined via the next() method"""
-        return self
+        return iter(self.next())
 
     def next(self):
-        """Return the next node in a preorder traversion"""
-
-        def seen_in_run(node, startnode):
-            """Checks if the node was seen in the iteration currently running
-            from startnode """
-            node_iter_nr = node._seen.setdefault(id(startnode), 0)
-            return (node_iter_nr >= startnode._seen[id(startnode)])
-        def make_seen(node, startnode):
-            """Mark node as seen in the iteration currently running from
-            startnode """
-            node._seen[id(startnode)] = startnode._seen[id(startnode)]
-
-        if self._iteritem is None:
-            # start a new iteration run
-            self._seen[id(self)] = self._seen.setdefault(id(self), 0) + 1
-            self._iteritem = self
-        # are there unseen children? If not, find unseen siblings
-        if self._iteritem.has_children():
-            # finding unseen children is the same as finding the first child's
-            # unseen siblings, so we go down one level
-            self._iteritem = self._iteritem.child(0)
-        # find unseen siblings (i.e. unseen parent's children)
-        while not self._iteritem.is_root():
-            self._iteritem = self._iteritem.parent()
-            if not seen_in_run(self._iteritem.child(-1), self):
-                for child in self._iteritem.children():
-                    if not seen_in_run(child, self):
-                        self._iteritem = child
-                        make_seen(self._iteritem, self)
-                        return self._iteritem
-        # end of iteration
-        self.reset()
-        raise StopIteration
+        """Return the next node using a stack generator"""
+        """Code by Brian licensed CC BY-SA 2.5, https://stackoverflow.com/a/320252/480642"""
+        stack = [self._children]
+        push = stack.append
+        pop = stack.pop
+        while stack: 
+            for e in pop():
+                yield e
+                if e._children:
+                    push(e._children)
 
     def reset(self):
         """Reset the traversion status of the node if it is halfway through an
