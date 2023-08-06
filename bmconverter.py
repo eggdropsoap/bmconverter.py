@@ -346,7 +346,7 @@ import sys
 import re
 import codecs
 from xml.sax import saxutils
-
+from builtins import str
 
 def warn(msg):
     """ print a warning message to stderr """
@@ -533,18 +533,6 @@ class Bookmark:
                          + "'newwindow' must be boolean values. "
                          + "%s not set." % name)
                     return None
-        if name in ['title', 'file', 'uri', 'destination', 'color', 'action']:
-            if value is not None:
-                if not isinstance(value, unicode):
-                    if name in ['title', 'file', 'uri']:
-                        warn("The attribute '%s' " % name \
-                             + "must be a unicode string. Trying to convert.")
-                    try:
-                        value = unicode(value)
-                    except UnicodeDecodeError:
-                        warn("Could not convert to unicode. " \
-                              + "%s not set." % name)
-                        return None
         if name == 'action':
             if value not in [None, 'GoTo', 'GoToR', 'URI', 'Launch']:
                 warn("%s is not a recognized action. " % value \
