@@ -1465,16 +1465,16 @@ def write_latex(root, outfilename, metadata={}):
     outfile.write("\\hypersetup{\n")
     outfile.write("  unicode=true,\n")
     outfile.write("  pdfpagelabels=true,\n")
-    if metadata.has_key('title'):
+    if 'title' in metadata:
         outfile.write("  pdftitle={%s},\n" % escape_latex(metadata['title']))
-    if metadata.has_key('author'):
+    if 'author' in metadata:
         outfile.write("  pdfauthor={%s},\n" % escape_latex(metadata['author']))
     outfile.write("}\n")
     outfile.write("\\usepackage{bookmark}\n")
     outfile.write("\n")
     outfile.write("\\begin{document}\n")
     outfile.write("\n")
-    if metadata.has_key('pdf'):
+    if 'pdf' in metadata:
         outfile.write("\\pagenumbering{arabic}\n")
         outfile.write("\\setcounter{page}{1}\n")
         outfile.write("\\includepdf[pages=-]{%s}\n" % metadata['pdf'])
@@ -1766,7 +1766,7 @@ def read_csv(infilename):
             current_node.file = unescape(moreopt_dict.setdefault("file", None))
             current_node.uri = unescape(moreopt_dict.setdefault("uri", None))
             current_node.color = moreopt_dict.setdefault("color", None)
-            if moreopt_dict.has_key("page"):
+            if page in moreopt_dict:
                 # This overrides the normal page and destinations
                 page = moreopt_dict["page"]
                 if (page is not None) and (page.find(" ") >= 0):
