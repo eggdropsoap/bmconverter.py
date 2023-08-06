@@ -971,14 +971,14 @@ def main():
     if len(files) < 2:
         warn ("You did not provide an output file. "
               +"The input file will be overwritten")
-        answer = raw_input("Do you want to overwrite? Yes [No]: ").lower()
+        answer = input("Do you want to overwrite? Yes [No]: ").lower()
         if answer != "yes":
             exit(0)
     else:
         outfilename = files[1]
         if os.path.exists(outfilename):
             warn("The output filename '%s' already exists." % outfilename)
-            answer = raw_input("Do you want to overwrite? Yes [No]: ").lower()
+            answer = input("Do you want to overwrite? Yes [No]: ").lower()
             if answer != "yes":
                 exit(0)
 
