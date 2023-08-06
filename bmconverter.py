@@ -939,8 +939,7 @@ def main():
         opts, files = getopt.getopt(sys.argv[1:], "hm:o:l",
                                                  ["help", "mode=", "offset=",
                                                   "pdf=", "long"])
-    except getopt.GetoptError, details:
-        die(details)
+    except getopt.GetoptError(details):die(details)
 
     pdf = None
     mode = ""
@@ -1099,7 +1098,7 @@ def read_xml(infilename):
     # Parse the infile;
     try:
         parser.parse(infilename)
-    except Exception, data:
+    except Exception(data):
         warn("There was a fatal error in parsing the xml file:")
         die(data)
 
@@ -1610,7 +1609,7 @@ def read_html(infilename):
     # Parse the infile;
     try:
         parser.parse(infilename)
-    except Exception, data:
+    except Exception(data):
         warn("There was a fatal error in parsing the html file:")
         die(data)
 
