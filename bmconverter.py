@@ -700,19 +700,22 @@ class Bookmark:
 
     def __iter__(self):
         """The iterator for this class is defined via the next() method"""
-        return iter(self.next())
+        return iter(self.preorder())
 
-    def next(self):
-        """Return the next node using a stack generator"""
-        """Code by Brian licensed CC BY-SA 2.5, https://stackoverflow.com/a/320252/480642"""
-        stack = [self._children]
-        push = stack.append
+    def preorder(self):
+        """Return the next node using a preorder traversal list generator"""
+        """Based on code by Brian licensed CC BY-SA 2.5, https://stackoverflow.com/a/320252/480642"""
+        stack = [self]
+        push = lambda e: stack.insert(0, e)
         pop = stack.pop
-        while stack: 
-            for e in pop():
-                yield e
-                if e._children:
-                    push(e._children)
+        current = None
+        while stack:
+            current = pop(0)
+            yield current
+            if current._children:
+                # for child in current._children:
+                for child in current._children[::-1]:
+                    push(child)
 
     def reset(self):
         """Reset the traversion status of the node if it is halfway through an
@@ -1286,7 +1289,7 @@ def write_text(root, outfilename, metadata={}, long=False):
     """
     outfile = codecs.open(outfilename, "w", "utf-8")
     warnings = set()
-    for node in root:
+    for node in iter(root):
         title = node.title.strip()
         if title != node.title:
             warnings.add("WARNING: Titles in the text output format will be " \
