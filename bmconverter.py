@@ -581,7 +581,6 @@ class Bookmark:
 
     def has_children(self):
         """Check if the node has any children"""
-        # return (len(self._children) > 0)
         if self._children:
             return True
         else:
