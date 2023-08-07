@@ -669,10 +669,8 @@ class Bookmark:
 
     def long_debug(self):
         """Print each node in the tree, recursively"""
-        self.reset()
         for node in self:
             print(str(node))
-        self.reset()
 
     def _obliterate(self):
         """Remove the node from the tree
@@ -689,12 +687,10 @@ class Bookmark:
 
     def flush(self):
         """Obliterate all nodes flagged for deletion"""
-        self.reset()
         dellist = []
         for node in self:
             if node._delete:
                 dellist.append(node)
-        self.reset()
         for node in dellist:
             node._obliterate()
 
@@ -727,11 +723,9 @@ class Bookmark:
         specified offset. The starting node is left untouched, except that its
         traversion status is reset.
         """
-        self.reset()
         for node in self:
             if isinstance(node.page, int):
                 node.page += offset
-        self.reset()
 
     def __iadd__(self, other):
         """Handle the expression 'self += other'
