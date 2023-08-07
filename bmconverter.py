@@ -701,7 +701,7 @@ class Bookmark:
     def preorder(self):
         """Return the next node using a preorder traversal list generator"""
         """Based on code by Brian licensed CC BY-SA 2.5, https://stackoverflow.com/a/320252/480642"""
-        stack = [self]
+        stack = self._children[::]
         push = lambda e: stack.insert(0, e)
         pop = stack.pop
         current = None
